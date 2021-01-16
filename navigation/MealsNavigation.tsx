@@ -6,6 +6,7 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import { createDrawerNavigator } from '@react-navigation/drawer'
 
 import CategoriesScreen from '../screens/CategoriesScreen'
+import CategoryMealsScreen from '../screens/CategoryMealsScreen'
 import FavoritesScreen from '../screens/FavoritesScreen'
 import MealDetailsScreen from '../screens/MealDetailsScreen'
 import FiltersScreen from '../screens/FiltersScreen'
@@ -33,6 +34,12 @@ const CategoriesScreenStack = (): ReactElement => (
       component={CategoriesScreen}
       options={{ title: 'Categories' }}
     />
+    <CategoriesStack.Screen
+      name="CategoryMeals"
+      component={CategoryMealsScreen}
+      options={{ title: 'CategoryMealsScreen' }}
+    />
+    <CategoriesStack.Screen name="Details" component={MealDetailsScreen} />
   </CategoriesStack.Navigator>
 )
 
