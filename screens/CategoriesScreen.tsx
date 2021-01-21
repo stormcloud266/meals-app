@@ -1,23 +1,45 @@
-import React, { ReactElement } from 'react'
-import { Text, View, StyleSheet, Button, FlatList } from 'react-native'
+import React, { ReactElement, useEffect } from 'react'
+import {
+  Text,
+  View,
+  StyleSheet,
+  FlatList,
+  TouchableOpacity,
+  Platform,
+} from 'react-native'
+import Colors from '../constants/colors'
 import { CATEGORIES } from '../data/test-data'
 
 interface Props {}
 
-const renderGridItem = (itemData) => {
-  return (
-    <View
-      style={{
-        ...styles.gridItem,
-        backgroundColor: itemData.item.color,
-      }}
-    >
-      <Text>{itemData.item.title}</Text>
-    </View>
-  )
-}
+const CategoriesScreen = (props: Props): ReactElement => {
+  useEffect(() => {
+    props.navigation.setOptions({
+      headerTitle: 'hello',
+      headerStyle: {
+        backgroundColor:
+          Platform.OS === 'ios' ? 'transparent' : Colors.primaryColor,
+      },
+      headerTintColor: Platform.OS === 'ios' ? Colors.primaryColor : '#fff',
+    })
+  })
 
-const CategoryScreen = (props: Props): ReactElement => {
+  const renderGridItem = (itemData) => {
+    return (
+      <TouchableOpacity
+        onPress={() => props.navigation.navigate('CategoryMeals')}
+        style={{
+          ...styles.gridItem,
+          backgroundColor: itemData.item.color,
+        }}
+      >
+        <View>
+          <Text>{itemData.item.title}</Text>
+        </View>
+      </TouchableOpacity>
+    )
+  }
+
   return (
     <FlatList data={CATEGORIES} numColumns={2} renderItem={renderGridItem} />
   )
@@ -32,4 +54,4 @@ const styles = StyleSheet.create({
   },
 })
 
-export default CategoryScreen
+export default CategoriesScreen
