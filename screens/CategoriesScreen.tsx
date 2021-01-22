@@ -22,12 +22,16 @@ const CategoriesScreen = (props: Props): ReactElement => {
       },
       headerTintColor: Platform.OS === 'ios' ? Colors.primaryColor : '#fff',
     })
-  })
+  }, [])
 
   const renderGridItem = (itemData) => {
     return (
       <TouchableOpacity
-        onPress={() => props.navigation.navigate('CategoryMeals')}
+        onPress={() =>
+          props.navigation.navigate('CategoryMeals', {
+            categoryId: itemData.item.id,
+          })
+        }
         style={{
           ...styles.gridItem,
           backgroundColor: itemData.item.color,
